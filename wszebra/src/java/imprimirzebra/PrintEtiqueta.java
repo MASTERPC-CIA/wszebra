@@ -45,7 +45,7 @@ public class PrintEtiqueta {
                         + "^FO320, 46^ADN, 11, 7^FD" +name_provee+"^FS   "
                         //+ "^FO320, 74^ADN, 11, 7^FD "+date_compra+ " ^FS   "
                         + "^FO230, 102^ADN, 11, 7 "
-                        + "^BCN, 60, Y, Y, N^FD masterpc>"+175+" ^FS "
+                        + "^BCN, 60, Y, Y, N^FD >"+codigo+" ^FS "
                         + "^XZ "; 
     // Se convierte el comando a bytes
         byte[] by = zplCommand.getBytes();
