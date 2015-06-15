@@ -33,20 +33,28 @@ public class PrintEtiqueta {
         AttributeSet aset = new HashAttributeSet();
         aset.add(new PrinterName(printName, null));
         services = PrintServiceLookup.lookupPrintServices(null, aset);
-
+        precio_produc="260";
     // Se crea las lineas de comandos que se envian a imprimir
-//        String zplCommand = "N\n"
-//                + "A10,1,0,3,1,1,N,"+date_compra+"\n"
-//                + "B10,31,0,3,3,7,60,N,"+codigo+"\n"
-//                + "A10,200,0,3,3,5,N,"+name_produc+"      "+precio_produc+"\n"
-//                + "P1\n";
-     String zplCommand = "^XA"   
-                        + "^FO320, 18^ADN, 11, 7^FD"+ date_compra+"^FS"
-                        + "^FO260, 60^ADN, 11, 7 "
-                        + "^BCN, 60, Y, Y, N^FD >"+codigo+" ^FS"
-                        + "^FO260, 140^ADN, 11, 7^FD" +name_produc+"^FS"
-                        + "^FO260, 156^ADN, 11, 7^FD "+precio_produc+ "^FS"
-                        + "^XZ "; 
+        String zplCommand ="";
+        if(name_produc.length()>27){
+            zplCommand = "N\n"
+                + "A10,1,0,3,1,1,N,\""+date_compra+"\"\n"
+                + "B10,31,0,1,3,7,40,N,\""+codigo+"\"\n"
+                + "A10,80,0,1,1,1,N,\""+name_produc.substring(0, 27)+"\"\n"
+                + "A10,110,0,1,1,1,N,\""+name_produc.substring(27)+"\"\n"
+                + "A10,140,0,1,2,2,N,\"P.V.P. "+precio_produc+"\"\n"
+                + "P1\n";
+        }else{
+            zplCommand = "N\n"
+                + "A10,1,0,3,1,1,N,\""+date_compra+"\"\n"
+                + "B10,31,0,1,3,7,40,N,\""+codigo+"\"\n"
+                + "A10,80,0,1,1,1,N,\""+name_produc+"\"\n"
+                + "A10,120,0,1,2,2,N,\"P.V.P. "+precio_produc+"\"\n"
+                + "P1\n";
+            
+        }
+        
+
     // Se convierte el comando a bytes
         byte[] by = zplCommand.getBytes();
         DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
